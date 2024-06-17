@@ -6,9 +6,7 @@ package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
 
-import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -16,11 +14,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandGenericHID;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
@@ -41,10 +36,10 @@ public class RobotContainer {
   private final Shooter m_shooter = new Shooter();
   // private final Joystick m_joystick = new Joystick(0);
   private final CommandXboxController m_driver = new CommandXboxController(0);
- // private final CommandXboxController m_operator = new CommandXboxController(1);
+  // private final CommandXboxController m_operator = new
+  // CommandXboxController(1);
 
   private final Command m_autonomousCommand;
-
 
   private final SendableChooser<Command> autoChooser;
 
@@ -52,22 +47,16 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    // Put Some buttons on the SmartDashboard
-
-    // Assign default commands
-    // m_drivetrain.setDefaultCommand(
-    // new TankDrive(() -> -m_driver.getLeftY(), () -> -m_driver.getRightY(),
-    // m_drivetrain));
 
     /**
      * Decide if you want to use Arcade drive
      */
     m_drivetrain.setDefaultCommand(this.getDefaultDriveCommand());
 
-       
     m_shooter.setDefaultCommand(m_shooter.getStopCommand());
- 
-    m_autonomousCommand =  new WaitCommand(1);//m_shooter.getShootCommand().withTimeout(2).andThen( new DriveForTime(m_drivetrain, -.5, 2));
+
+    m_autonomousCommand = new WaitCommand(1);// m_shooter.getShootCommand().withTimeout(2).andThen( new
+                                             // DriveForTime(m_drivetrain, -.5, 2));
 
     // Build an auto chooser. This will use Commands.none() as the default option.
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -80,29 +69,27 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
-        // Set the scheduler to log Shuffleboard events for command initialize, interrupt, finish
+    // Set the scheduler to log Shuffleboard events for command initialize,
+    // interrupt, finish
     CommandScheduler.getInstance()
         .onCommandInitialize(
-            command ->
-                Shuffleboard.addEventMarker(
-                    "Command initialized", command.getName(), EventImportance.kNormal));
+            command -> Shuffleboard.addEventMarker(
+                "Command initialized", command.getName(), EventImportance.kNormal));
     CommandScheduler.getInstance()
         .onCommandInterrupt(
-            command ->
-                Shuffleboard.addEventMarker(
-                    "Command interrupted", command.getName(), EventImportance.kNormal));
+            command -> Shuffleboard.addEventMarker(
+                "Command interrupted", command.getName(), EventImportance.kNormal));
     CommandScheduler.getInstance()
         .onCommandFinish(
-            command ->
-                Shuffleboard.addEventMarker(
-                    "Command finished", command.getName(), EventImportance.kNormal));
+            command -> Shuffleboard.addEventMarker(
+                "Command finished", command.getName(), EventImportance.kNormal));
   }
 
   private Command getDefaultDriveCommand() {
-    //return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
+    // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new TankDrive(m_driver::getLeftY, m_driver::getRightX, m_drivetrain);
-    
+    return new TankDrive(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain);
+
   }
 
   /**
@@ -128,13 +115,12 @@ public class RobotContainer {
     // Connect the buttons to commands
     m_driver.start().onTrue(m_drivetrain.getInvertControlsCommand());
     m_driver.x().whileTrue(m_shooter.getShootWhenReadyCommands());
-   // m_driver.x().whileTrue(new RunCommand(() -> m_shooter.shoot(),m_shooter));
+    // m_driver.x().whileTrue(new RunCommand(() -> m_shooter.shoot(),m_shooter));
     m_driver.y().whileTrue(m_shooter.getIntakeCommand());
     m_driver.b().onTrue(m_shooter.getStopCommand());
-   // m_driver.a().whileTrue(new AmpShoot(m_shooter).withTimeout(5));
+    // m_driver.a().whileTrue(new AmpShoot(m_shooter).withTimeout(5));
     SmartDashboard.putNumber("TopShooterMotor", 100.0);
     SmartDashboard.putNumber("BottomShooterMotor", 100.0);
-
 
   }
 
@@ -144,8 +130,8 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-  // return m_autonomousCommand;
-   return autoChooser.getSelected();
+    // return m_autonomousCommand;
+    return autoChooser.getSelected();
     // return new PathPlannerAuto("New New Auto");
   }
 
