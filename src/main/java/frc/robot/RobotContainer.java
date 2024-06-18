@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -47,16 +48,26 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
+    /**
+     * register commands to use with Autos
+     */
+    NamedCommands.registerCommand("shooter", 
+      m_shooter.getShootWhenReadyCommands()
+      );
 
     /**
      * Decide if you want to use Arcade drive
      */
     m_drivetrain.setDefaultCommand(this.getDefaultDriveCommand());
 
+    /**
+     * Set default command for shooter
+     */
     m_shooter.setDefaultCommand(m_shooter.getStopCommand());
 
     m_autonomousCommand = new WaitCommand(1);// m_shooter.getShootCommand().withTimeout(2).andThen( new
-                                             // DriveForTime(m_drivetrain, -.5, 2));
+    // DriveForTime(m_drivetrain, -.5, 2));
+
 
     // Build an auto chooser. This will use Commands.none() as the default option.
     autoChooser = AutoBuilder.buildAutoChooser();
@@ -133,14 +144,6 @@ public class RobotContainer {
     // return m_autonomousCommand;
     return autoChooser.getSelected();
     // return new PathPlannerAuto("New New Auto");
-  }
-
-  public void namedCommand() {
-    NamedCommands.registerCommand("Shoot",
-        new SequentialCommandGroup(
-            m_shooter.getShootCommand(),
-            new WaitCommand(1.2),
-            m_shooter.getStopCommand()));
   }
 
 }
