@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
@@ -99,7 +100,7 @@ public class RobotContainer {
   private Command getDefaultDriveCommand() {
     // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new TankDrive(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain);
+    return new ArcadeDrive(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain);
 
   }
 
