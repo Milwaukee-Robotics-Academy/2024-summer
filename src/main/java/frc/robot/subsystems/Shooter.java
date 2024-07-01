@@ -33,12 +33,12 @@ public class Shooter extends SubsystemBase {
     m_flywheel.restoreFactoryDefaults();
     m_flywheel.setSmartCurrentLimit(60);
     m_flywheel.setIdleMode(IdleMode.kBrake);
-    m_flywheel.setInverted(true);
+    m_flywheel.setInverted(false);
     m_flywheel.setOpenLoopRampRate(0.1);
     m_triggerMotor.restoreFactoryDefaults();
     m_triggerMotor.setSmartCurrentLimit(60);
     m_triggerMotor.setIdleMode(IdleMode.kBrake);
-    m_triggerMotor.setInverted(true);
+    m_triggerMotor.setInverted(false);
 
     // m_triggerMotor.setOpenLoopRampRate(0.1);
     SmartDashboard.putNumber("FW-Encoder/speed", m_flywheelEncoder.getVelocity());
