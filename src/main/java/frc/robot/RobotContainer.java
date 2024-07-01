@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
@@ -34,7 +35,7 @@ import frc.robot.subsystems.Shooter;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
-//TODO: implement shooter  private final Shooter m_shooter = new Shooter();
+private final Shooter m_shooter = new Shooter();
   // private final Joystick m_joystick = new Joystick(0);
   private final CommandXboxController m_driver = new CommandXboxController(0);
   // private final CommandXboxController m_operator = new
@@ -99,7 +100,7 @@ public class RobotContainer {
   private Command getDefaultDriveCommand() {
     // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new TankDrive(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain);
+    return new ArcadeDrive(() -> m_driver.getLeftY(), () -> -m_driver.getRightX(), m_drivetrain);
 
   }
 
@@ -125,9 +126,9 @@ public class RobotContainer {
   private void initializeShooterControls() {
     // Connect the buttons to commands
     m_driver.start().onTrue(m_drivetrain.getInvertControlsCommand());
-    // m_driver.x().whileTrue(m_shooter.getShootWhenReadyCommands());
-    // m_driver.y().whileTrue(m_shooter.getIntakeCommand());
-    // m_driver.b().onTrue(m_shooter.getStopCommand());
+     m_driver.x().whileTrue(m_shooter.getShootWhenReadyCommands());
+     m_driver.y().whileTrue(m_shooter.getIntakeCommand());
+     m_driver.b().onTrue(m_shooter.getStopCommand());
     // m_driver.a().whileTrue(new AmpShoot(m_shooter).withTimeout(5));
     SmartDashboard.putNumber("TopShooterMotor", 100.0);
     SmartDashboard.putNumber("BottomShooterMotor", 100.0);
