@@ -7,6 +7,7 @@ package frc.robot;
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
@@ -39,6 +41,7 @@ public class RobotContainer {
   private final CommandXboxController m_driver = new CommandXboxController(0);
   // private final CommandXboxController m_operator = new
   // CommandXboxController(1);
+  private final SlewRateLimiter m_TurnLimiter = new SlewRateLimiter(Constants.DriveConstants.kTurnSlewRate);
 
   private final Command m_autonomousCommand;
 
@@ -99,7 +102,7 @@ public class RobotContainer {
   private Command getDefaultDriveCommand() {
     // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new TankDrive(() -> m_driver.getLeftY(), () -> m_driver.getRightX(), m_drivetrain);
+    return new ArcadeDrive(() -> m_driver.getLeftY(), () -> m_TurnLimiter.calculate(-m_driver.getRightX()), m_drivetrain);
 
   }
 
