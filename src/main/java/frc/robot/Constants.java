@@ -36,8 +36,9 @@ public final class Constants {
         // Assumes the encoders are directly mounted on the wheel shafts
         (kWheelDiameterInches * Math.PI) / (double) kEncoderCPR;
 
-    public static final int kForwardBackSlewRate = 3;
-    public static final int kTurnSlewRate = 2;
+    public static final double kForwardBackSlewRate = 3;
+    // number of units per second that the can change
+    public static final double kTurnSlewRate = 1;
     public static final double kTrackWidthMeters = 0.53;
 
     public static final double kS = 0.11673; // copied from the features/pathplanner branch
