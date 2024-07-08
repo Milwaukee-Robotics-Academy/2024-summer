@@ -23,15 +23,11 @@ import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.util.sendable.SendableRegistry;
-import edu.wpi.first.wpilibj.AnalogGyro;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.Robot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -52,9 +48,9 @@ public class Drivetrain extends SubsystemBase {
   private static final double kWheelRadius = 0.0508; // meters
 
   private final CANSparkMax m_leftLeader = new CANSparkMax(DriveConstants.kLeftMotorPort1, MotorType.kBrushless);
-  private final CANSparkMax m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotorPort2, MotorType.kBrushless);
+ // private final CANSparkMax m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotorPort2, MotorType.kBrushless);
   private final CANSparkMax m_rightLeader = new CANSparkMax(DriveConstants.kRightMotorPort1, MotorType.kBrushless);
-  private final CANSparkMax m_rightFollower = new CANSparkMax(DriveConstants.kRightMotorPort2, MotorType.kBrushless);
+  // private final CANSparkMax m_rightFollower = new CANSparkMax(DriveConstants.kRightMotorPort2, MotorType.kBrushless);
   private RelativeEncoder m_leftEncoder;
   private RelativeEncoder m_rightEncoder;
 
@@ -88,13 +84,13 @@ public class Drivetrain extends SubsystemBase {
     m_leftLeader.setSmartCurrentLimit(80);
     m_rightLeader.restoreFactoryDefaults();
     m_rightLeader.setSmartCurrentLimit(80);
-    m_leftFollower.restoreFactoryDefaults();
-    m_leftFollower.setSmartCurrentLimit(80);
-    m_rightFollower.restoreFactoryDefaults();
-    m_rightFollower.setSmartCurrentLimit(80);
+    // m_leftFollower.restoreFactoryDefaults();
+    // m_leftFollower.setSmartCurrentLimit(80);
+    // m_rightFollower.restoreFactoryDefaults();
+    // m_rightFollower.setSmartCurrentLimit(80);
 
-    m_leftFollower.follow(m_leftLeader);
-    m_rightFollower.follow(m_rightLeader);
+    // m_leftFollower.follow(m_leftLeader);
+    // m_rightFollower.follow(m_rightLeader);
 
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
