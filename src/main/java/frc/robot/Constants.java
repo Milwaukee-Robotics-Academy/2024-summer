@@ -10,11 +10,11 @@ public final class Constants {
   public static final int kRightClimberMotorPort = 10;
 
   public static final class DriveConstants {
-    public static final int kLeftMotorPort1 = 2;
-//    public static final int kLeftMotorPort2 = 2;
+    public static final int kLeftMotorPort1 = 4;
+//    public static final int kLeftMotorPort2 = 3;
 
-    public static final int kRightMotorPort1 = 4;
-//    public static final int kRightMotorPort2 = 4;
+    public static final int kRightMotorPort1 = 2;
+//    public static final int kRightMotorPort2 = 1;
 
     public static final int kFlywheelMotorPort = 6;
     public static final int kShooterMotorPort = 5;
@@ -38,7 +38,7 @@ public final class Constants {
 
     public static final double kForwardBackSlewRate = 3;
     // number of units per second that the can change
-    public static final double kTurnSlewRate = 1;
+    public static final double kTurnSlewRate = 2;
     public static final double kTrackWidthMeters = 0.53;
 
     public static final double kS = 0.11673; // copied from the features/pathplanner branch
