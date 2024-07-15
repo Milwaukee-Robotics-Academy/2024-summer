@@ -178,4 +178,4 @@ logs/
 ctre_sim/
 
 #wpilib_preferences
-wpilib_preferences.json
+.wpilib/wpilib_preferences.json
