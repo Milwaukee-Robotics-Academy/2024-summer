@@ -10,11 +10,12 @@ public final class Constants {
   public static final int kRightClimberMotorPort = 10;
 
   public static final class DriveConstants {
+
     public static final int kLeftMotorPort1 = 4;
-//    public static final int kLeftMotorPort2 = 3;
+    public static final int kLeftMotorPort2 = 3;
 
     public static final int kRightMotorPort1 = 2;
-//    public static final int kRightMotorPort2 = 1;
+    public static final int kRightMotorPort2 = 1;
 
     public static final int kFlywheelMotorPort = 6;
     public static final int kShooterMotorPort = 5;
