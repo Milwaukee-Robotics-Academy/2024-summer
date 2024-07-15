@@ -48,7 +48,7 @@ public class Drivetrain extends SubsystemBase {
   private static final double kWheelRadius = 0.0508; // meters
 
   private final CANSparkMax m_leftLeader = new CANSparkMax(DriveConstants.kLeftMotorPort1, MotorType.kBrushless);
- // private final CANSparkMax m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotorPort2, MotorType.kBrushless);
+  // private final CANSparkMax m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotorPort2, MotorType.kBrushless);
   private final CANSparkMax m_rightLeader = new CANSparkMax(DriveConstants.kRightMotorPort1, MotorType.kBrushless);
   // private final CANSparkMax m_rightFollower = new CANSparkMax(DriveConstants.kRightMotorPort2, MotorType.kBrushless);
   private RelativeEncoder m_leftEncoder;
