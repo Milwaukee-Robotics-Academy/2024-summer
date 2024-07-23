@@ -38,7 +38,7 @@ public final class Constants {
 
     public static final double kForwardBackSlewRate = 3;
     // number of units per second that the can change
-    public static final double kTurnSlewRate = 1;
+    public static final double kTurnSlewRate = 4;
     public static final double kTrackWidthMeters = 0.53;
 
     public static final double kS = 0.11673; // copied from the features/pathplanner branch

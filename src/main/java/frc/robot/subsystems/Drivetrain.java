@@ -11,6 +11,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.util.ReplanningConfig;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
 import com.revrobotics.CANSparkLowLevel.MotorType;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
@@ -82,8 +83,10 @@ public class Drivetrain extends SubsystemBase {
 
     m_leftLeader.restoreFactoryDefaults();
     m_leftLeader.setSmartCurrentLimit(80);
+    m_leftLeader.setIdleMode(IdleMode.kBrake);
     m_rightLeader.restoreFactoryDefaults();
     m_rightLeader.setSmartCurrentLimit(80);
+    m_rightLeader.setIdleMode(IdleMode.kBrake);
     // m_leftFollower.restoreFactoryDefaults();
     // m_leftFollower.setSmartCurrentLimit(80);
     // m_rightFollower.restoreFactoryDefaults();
