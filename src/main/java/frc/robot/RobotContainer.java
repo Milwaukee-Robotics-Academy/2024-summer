@@ -102,7 +102,7 @@ private final Shooter m_shooter = new Shooter();
   private Command getDefaultDriveCommand() {
     // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new ArcadeDrive(() -> -m_driver.getLeftY(), () -> m_TurnLimiter.calculate(-m_driver.getRightX()), m_drivetrain);
+    return new ArcadeDrive(() -> -m_driver.getLeftY()*.7, () -> m_TurnLimiter.calculate(-m_driver.getLeftX()*.7), m_drivetrain);
 
   }
 
