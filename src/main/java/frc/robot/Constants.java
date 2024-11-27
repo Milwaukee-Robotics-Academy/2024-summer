@@ -53,8 +53,8 @@ public final class Constants {
 
     public static double kFlywheelMotorShootSpeed = 1.0;
     public static double kTriggerMotorShootSpeed = 1.0;
-    public static double kFlywheelMotorIntakeSpeed = -0.25;
-    public static double kTriggerMotorIntakeSpeed = -0.25;
+    public static double kFlywheelMotorIntakeSpeed = -1.0;
+    public static double kTriggerMotorIntakeSpeed = -1.0;
     public static double kShooterVelocity = 5000;
 
    }
