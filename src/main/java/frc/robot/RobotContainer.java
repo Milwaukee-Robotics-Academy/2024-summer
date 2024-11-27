@@ -62,6 +62,7 @@ private final Shooter m_shooter = new Shooter();
      * Decide if you want to use Arcade drive
      */
     m_drivetrain.setDefaultCommand(this.getDefaultDriveCommand());
+    m_shooter.setDefaultCommand(m_shooter.getStopCommand());
 
     /**
      * Set default command for shooter
@@ -102,7 +103,7 @@ private final Shooter m_shooter = new Shooter();
   private Command getDefaultDriveCommand() {
     // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new ArcadeDrive(() -> -m_driver.getLeftY(), () -> m_TurnLimiter.calculate(-m_driver.getRightX()), m_drivetrain);
+    return new ArcadeDrive(() -> -m_driver.getLeftY(), () -> m_TurnLimiter.calculate(-m_driver.getLeftX()), m_drivetrain);
 
   }
 
