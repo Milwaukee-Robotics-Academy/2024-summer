@@ -154,6 +154,8 @@ private final Shooter m_shooter = new Shooter();
   public void teleopInit() {
     //Red side start
     m_drivetrain.resetOdometry(new Pose2d(12,0,new Rotation2d().fromDegrees(-90)));
+    //Blue side start
+  //  m_drivetrain.resetOdometry(new Pose2d(5.7,0,new Rotation2d().fromDegrees(-90)));
   }
 
 }
