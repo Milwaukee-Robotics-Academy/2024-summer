@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj2.command.WrapperCommand;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ShooterConstants;
@@ -73,10 +74,10 @@ public class Shooter extends SubsystemBase {
    * 
    * @return
    */
-  public SequentialCommandGroup getShootWhenReadyCommands() {
+  public WrapperCommand getShootWhenReadyCommands() {
     return new SequentialCommandGroup(
         this.getShooterWarmupCommand().until(this.shooterReadyTrigger()),
-        this.getShootCommand());
+        this.getShootCommand()).withName("ShootWhenReady");
   }
 
   public Trigger shooterReadyTrigger() {
