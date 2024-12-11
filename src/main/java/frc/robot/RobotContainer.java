@@ -8,6 +8,8 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import edu.wpi.first.math.filter.SlewRateLimiter;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.shuffleboard.EventImportance;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -62,6 +64,7 @@ private final Shooter m_shooter = new Shooter();
      * Decide if you want to use Arcade drive
      */
     m_drivetrain.setDefaultCommand(this.getDefaultDriveCommand());
+    m_shooter.setDefaultCommand(m_shooter.getStopCommand());
 
     /**
      * Set default command for shooter
@@ -78,7 +81,7 @@ private final Shooter m_shooter = new Shooter();
 
     // Show what command your subsystem is running on the SmartDashboard
     SmartDashboard.putData(m_drivetrain);
-    // SmartDashboard.putData(m_shooter);
+    SmartDashboard.putData(m_shooter);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -102,7 +105,7 @@ private final Shooter m_shooter = new Shooter();
   private Command getDefaultDriveCommand() {
     // return m_drivetrain.getDriveCommand(m_driver::getLeftY,m_driver::getRightX);
 
-    return new ArcadeDrive(() -> -m_driver.getLeftY()*.7, () -> m_TurnLimiter.calculate(-m_driver.getLeftX()*.7), m_drivetrain);
+    return new ArcadeDrive(() -> -m_driver.getLeftY(), () -> m_TurnLimiter.calculate(-m_driver.getRightX()*.7), m_drivetrain);
 
   }
 
@@ -146,6 +149,10 @@ private final Shooter m_shooter = new Shooter();
     // return m_autonomousCommand;
     return autoChooser.getSelected();
     // return new PathPlannerAuto("New New Auto");
+  }
+
+  public void teleopInit() {
+    m_drivetrain.resetOdometry(new Pose2d(12,0,new Rotation2d().fromDegrees(-90)));
   }
 
 }

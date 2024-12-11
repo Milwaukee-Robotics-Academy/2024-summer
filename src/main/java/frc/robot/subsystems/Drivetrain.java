@@ -97,7 +97,9 @@ public class Drivetrain extends SubsystemBase {
     // gearbox is constructed, you might have to invert the left side instead.
     m_rightLeader.setInverted(true);
     m_leftLeader.setInverted(false);
+
     m_gyro = new AHRS(SPI.Port.kMXP);
+
 
     m_rightLeader.setOpenLoopRampRate(0.2);
     m_leftLeader.setOpenLoopRampRate(0.2);
@@ -121,6 +123,8 @@ public class Drivetrain extends SubsystemBase {
     Shuffleboard.getTab("Field").add("Field1", m_field);
 
     SmartDashboard.putBoolean("Invert Driver Controls", invertDriverControls);
+    SmartDashboard.putData("Gyro", m_gyro);
+    SmartDashboard.putData("Diff Drivetrain", m_drive);
 
     // Configure AutoBuilder last
     AutoBuilder.configureRamsete(
@@ -177,7 +181,12 @@ public class Drivetrain extends SubsystemBase {
     SmartDashboard.putNumber("Right Distance", m_rightEncoder.getPosition());
     SmartDashboard.putNumber("Left Speed", m_leftEncoder.getVelocity());
     SmartDashboard.putNumber("Right Speed", m_rightEncoder.getVelocity());
-    SmartDashboard.putNumber("Gyro2", getGyroRotation2d().getDegrees());
+    SmartDashboard.putNumber("Pose/X",getPose().getX());
+    SmartDashboard.putNumber("Pose/y",getPose().getY());
+    SmartDashboard.putNumber("Pose/Rot",getPose().getRotation().getDegrees());
+
+
+
   }
 
   /**
